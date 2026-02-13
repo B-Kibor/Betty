@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Trevor</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.85em%22 font-size=%2280%22>❤️</text></svg>">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
+    overflow-x: hidden;
+    color: #1a1a1a;
+    text-align: center;
+    min-height: 100vh;
+    position: relative;
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 20% 50%, rgba(255,182,193,0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255,192,203,0.1) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+.container {
+    padding: 0 20px 60px;
+    max-width: 900px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+}
+
+h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 56px;
+    font-weight: 700;
+    color: #000000;
+    margin-bottom: 20px;
+    letter-spacing: -1px;
+}
+
+h1 .red-emoji {
+    color: #ff0000;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.message {
+    max-width: 650px;
+    margin: 40px auto;
+    font-size: 18px;
+    line-height: 1.8;
+    background: white;
+    padding: 50px;
+    border-radius: 16px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+    animation: fadeIn 0.8s ease;
+}
+
+.message p {
+    margin: 0 0 24px 0;
+    color: #4a4a4a;
+}
+
+.message h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    margin-top: 40px;
+    color: #000000;
+}
+
+.gallery {
+    margin: 0 auto 40px;
+    display: flex;
+    justify-content: center;
+    padding-top: 20px;
+}
+
+.gallery img {
+    max-width: 100%;
+    width: auto;
+    height: auto;
+    max-height: 500px;
+    object-fit: contain;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 2px solid rgba(255,255,255,0.8);
+    position: relative;
+}
+
+.gallery img::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg, #ff6b6b, #feca57, #48dbfb, #ff6b6b);
+    border-radius: 20px;
+    opacity: 0;
+    transition: opacity 0.5s;
+    z-index: -1;
+}
+
+.gallery img:hover {
+    transform: translateY(-12px) scale(1.02);
+    box-shadow: 0 30px 80px rgba(0,0,0,0.2);
+}
+
+.buttons {
+    margin-top: 60px;
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+}
+
+.button-container {
+    position: relative;
+    width: 400px;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+button {
+    padding: 18px 48px;
+    font-size: 17px;
+    font-weight: 600;
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    font-family: 'Inter', sans-serif;
+    letter-spacing: 0.3px;
+}
+
+.yes {
+    background: linear-gradient(135deg, #000000 0%, #2c2c2c 100%);
+    color: white;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    overflow: hidden;
+    z-index: 10;
+    pointer-events: auto;
+}
+
+.yes::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.2);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.yes:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+.yes:hover {
+    transform: translate(-50%, -50%) translateY(-4px) scale(1.05);
+    box-shadow: 0 12px 32px rgba(0,0,0,0.35);
+}
+
+.no {
+    background: linear-gradient(135deg, #f5f5f5 0%, #e0e0e0 100%);
+    color: #666666;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, calc(-50% + 80px));
+    z-index: 5;
+}
+
+.footer {
+    margin-top: 80px;
+    font-size: 15px;
+    color: #000000;
+    font-weight: 300;
+}
+
+.heart {
+    position: fixed;
+    font-size: 20px;
+    animation: float 8s linear infinite;
+    pointer-events: none;
+    opacity: 0.6;
+}
+
+@keyframes float {
+    from { transform: translateY(100vh) rotate(0deg); opacity: 0.6; }
+    to { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+}
+
+.music-toggle {
+    position: fixed;
+    top: 30px;
+    right: 30px;
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    border: 2px solid rgba(0,0,0,0.08);
+    padding: 14px 20px;
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 18px;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    z-index: 100;
+}
+
+.music-toggle:hover {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+    transform: translateY(-3px);
+}
+
+.music-menu {
+    position: fixed;
+    top: 80px;
+    right: 30px;
+    background: white;
+    border-radius: 12px;
+    padding: 15px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+    display: none;
+    z-index: 99;
+    min-width: 250px;
+}
+
+.music-menu.show {
+    display: block;
+}
+
+.song-item {
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-size: 14px;
+    color: #333;
+}
+
+.song-item:hover {
+    background: #f0f0f0;
+}
+
+.song-item.active {
+    background: #000;
+    color: white;
+}
+</style>
+</head>
+
+<body>
+
+<button class="music-toggle" onclick="toggleMusicMenu()">🎵</button>
+<div class="music-menu" id="musicMenu">
+    <div class="song-item" onclick="playSong(0)">🎵 Megan Thee Stallion - LOVER GIRL</div>
+    <div class="song-item" onclick="playSong(1)">🎵 The Weeknd - I Feel It Coming</div>
+    <div class="song-item" onclick="playSong(2)">🎵 Taylor Swift - Wildest Dreams</div>
+    <div class="song-item" onclick="stopMusic()">⏹️ Stop Music</div>
+</div>
+<audio id="song1" loop>
+    <source src="Megan Thee Stallion - LOVER GIRL [Official Video] [VjtrfCDDelQ].mp3" type="audio/mpeg">
+</audio>
+<audio id="song2" loop>
+    <source src="The Weeknd - I Feel It Coming ft. Daft Punk (Official Video) [qFLhGq0060w] (1).mp3" type="audio/mpeg">
+</audio>
+<audio id="song3" loop>
+    <source src="Taylor Swift - Wildest Dreams [IdneKLhsWOQ].mp3" type="audio/mpeg">
+</audio>
+
+<div class="container">
+    <div class="gallery">
+        <img src="Screenshot_20260213_113033_Instagram.png" alt="Trevor">
+    </div>
+
+    <h1>Trevor Odhiambo Were <span class="red-emoji">❤️</span></h1>
+
+    <div class="message">
+        <p>
+            My love, I've been thinking deeply about us… and I need to say this from my heart.
+        </p>
+
+        <p>
+            I am truly sorry for always overreacting and for the times I insulted you badly.
+            You never deserved that. My emotions sometimes get the best of me,
+            but that is not an excuse for hurting someone I love.
+        </p>
+
+        <p>
+            Even though I can't be there physically with you,
+            please know that my heart chooses you — every single time.
+        </p>
+
+        <h2>Will you be my Valentine? 💕</h2>
+    </div>
+
+    <div class="buttons">
+        <div class="button-container">
+            <button class="yes" onclick="sayYes()">Yes ❤️</button>
+            <button class="no" onmousemove="moveNo(this)">No 😢</button>
+        </div>
+    </div>
+
+    <div class="footer">
+        Made with love by Kibor Betty Kisabit ❤️
+    </div>
+</div>
+
+
+<script>
+let currentSong = null;
+const songs = [document.getElementById('song1'), document.getElementById('song2'), document.getElementById('song3')];
+
+function toggleMusicMenu() {
+    document.getElementById('musicMenu').classList.toggle('show');
+}
+
+function playSong(index) {
+    songs.forEach((song, i) => {
+        song.pause();
+        song.currentTime = 0;
+        document.querySelectorAll('.song-item')[i].classList.remove('active');
+    });
+    
+    songs[index].play();
+    currentSong = index;
+    document.querySelectorAll('.song-item')[index].classList.add('active');
+    document.getElementById('musicMenu').classList.remove('show');
+}
+
+function stopMusic() {
+    songs.forEach((song, i) => {
+        song.pause();
+        song.currentTime = 0;
+        document.querySelectorAll('.song-item')[i].classList.remove('active');
+    });
+    currentSong = null;
+    document.getElementById('musicMenu').classList.remove('show');
+}
+
+function sayYes() {
+    const container = document.querySelector('.container');
+    const buttons = document.querySelector('.buttons');
+    const footer = document.querySelector('.footer');
+    
+    container.remove();
+    buttons.remove();
+    footer.remove();
+    
+    const successDiv = document.createElement('div');
+    successDiv.innerHTML = `
+        <div style="padding:80px 20px 40px; text-align:center; background:linear-gradient(to bottom, #ffffff 0%, #f8f9fa 100%); min-height:100vh; display:flex; align-items:center; justify-content:center; flex-direction:column; position:fixed; top:0; left:0; right:0; bottom:0; z-index:1; overflow-y:auto;">
+            <div style="animation: fadeIn 1s ease; max-width:700px; padding:20px;">
+                <img src="IMG-20260213-WA0001.jpg" alt="Trevor" style="max-width:100%; width:auto; height:auto; max-height:350px; object-fit:contain; border-radius:20px; box-shadow:0 20px 60px rgba(0,0,0,0.15); margin-bottom:35px;">
+                <h1 style="font-family:'Playfair Display',serif; font-size:56px; margin-bottom:25px; color:#000000; letter-spacing:-1px; line-height:1.2;">You Said Yes! <span style="color:#ff0000;">❤️</span></h1>
+                <p style="font-size:22px; line-height:1.7; color:#000000; font-family:'Inter',sans-serif; margin-bottom:25px; font-weight:500;">
+                    You're my home. Every moment with you feels like a beautiful dream I never want to wake up from.
+                </p>
+                <p style="font-size:19px; line-height:1.7; color:#4a4a4a; font-family:'Inter',sans-serif; margin-bottom:0;">
+                    Thank you for loving me even when I'm not perfect.
+                    I promise to grow, to respect you, and to love you better.
+                    Happy Valentine's Day, Trevor ❤️
+                </p>
+                <div style="margin-top:50px; font-size:48px; opacity:0.8;">
+                    ❤️ 💖 💗 💓 💝
+                </div>
+            </div>
+        </div>
+        <style>
+            @keyframes fadeIn {
+                from { opacity: 0; transform: translateY(30px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+        </style>
+    `;
+    document.body.appendChild(successDiv);
+    
+    for(let i = 0; i < 100; i++) {
+        setTimeout(() => {
+            const confetti = document.createElement('div');
+            confetti.innerHTML = ['❤️', '🌹'][Math.floor(Math.random() * 2)];
+            confetti.style.position = 'fixed';
+            confetti.style.left = Math.random() * 100 + 'vw';
+            confetti.style.top = '-50px';
+            confetti.style.fontSize = '30px';
+            confetti.style.animation = 'float 4s linear';
+            confetti.style.zIndex = '2';
+            document.body.appendChild(confetti);
+            setTimeout(() => confetti.remove(), 4000);
+        }, i * 50);
+    }
+}
+
+let noButtonClicks = 0;
+
+function moveNo(button) {
+    noButtonClicks++;
+    
+    const hoverMessages = [
+        "Wait... 🤔",
+        "Hold on... ✋",
+        "Not so fast! 😅",
+        "Think twice! 💡",
+        "Really? 🥺"
+    ];
+    
+    if (noButtonClicks <= hoverMessages.length) {
+        button.textContent = hoverMessages[noButtonClicks - 1];
+    }
+    
+    const angle = Math.random() * Math.PI * 2;
+    const distance = 120 + Math.random() * 80;
+    
+    const randomX = Math.cos(angle) * distance;
+    const randomY = Math.sin(angle) * distance;
+    const randomRotate = (Math.random() - 0.5) * 30;
+    
+    button.style.transform = `translate(calc(-50% + ${randomX}px), calc(-50% + ${randomY}px)) rotate(${randomRotate}deg)`;
+    button.style.transition = "transform 0.4s cubic-bezier(0.4, 0, 0.2, 1)";
+}
+
+setInterval(() => {
+    const heart = document.createElement("div");
+    heart.classList.add("heart");
+    heart.innerHTML = ['❤️', '💕', '💖', '💗'][Math.floor(Math.random() * 4)];
+    heart.style.left = Math.random() * 100 + "vw";
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 6000);
+}, 500);
+</script>
+
+</body>
+</html>
